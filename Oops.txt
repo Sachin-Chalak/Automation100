@@ -1,0 +1,923 @@
+ 
+1) OOPs CONCEPTS :-
+===================
+
+i) What is class ?
+Ans:- Class is nothing but it is the blue print of 'Object' is called as class.
+
+
+ii) What is Object?
+Ans:- Object is nothing but it is the collection of data and functionality is called as Object.
+
+
+iii) in OOPs which types of methods are using class program ?
+	> Static method ( @Class Method, @Static Method )
+	> instance Method 
+	> Constructor method --> __init__
+
+NOTE: 1] Static method 2] Constructor Method----> In class program these 2 types of method to be used remember it
+
+
+1] Ex:- Simple class 
+--------------------
+ 
+class person:
+    pass
+p=person()
+print(p)
+
+
+2] Ex:- class inside using function
+-----------------------------------
+
+class person:
+    def display(self):
+        print("hello")
+
+p1=person()
+p1.display()
+
+
+Out-Put
+------
+hello
+
+
+
+3] Ex:- class inside using constructor
+--------------------------------------
+
+class person:
+    def __init__(self,name):----------> Constructor Method
+        self.name=name 
+    def display(self): ---------------> instance Method
+        print("hello",self.name)
+p1=person("Sachin")
+p1.display()
+
+
+
+4] Ex:- class level Program 
+----------------------------
+
+class Employee:
+    def __init__(self,eno,ename): ===========> This is Special function, & also know as constructor , -OR- Constructor Method
+        self.eno=eno ========>instant Variable
+        self.ename=enmae ======> Instant Variable
+    
+    def display(self): ===========> instance Method
+        print("Employee no : ",self.eno)  
+        print("Employee name : ",self.ename) 
+
+e1=Employee(100,'Durga')  =========> This is the "OBJECT" Creations
+e2=Employee(200,'Vedant') =========> This is the "OBJECT" Creations
+
+e1.display() ====> Function Call
+e2.display() ====> Function Call
+
+
+NOTE:- 
+-----
+1> This class content how many function, 2 Function are available in that "1 functon is the special function" --This function also know as constructor
+2> In this function totaly "2 Instance variable are there (1)eno,  (2)ename,"
+3> Here "e1 is the referance variable pointing to that object " 
+4> Here def __init__(self,eno,ename): constrctor automatically by default as executed we are not required to CALL Remember this one
+5> Here e1.display() ====> We have to Call the Function
+6> Self means Current object====> This is OBJECT Related Method
+
+
+
+5] Ex:- Using Static method program
+-----------------------------------
+
+class person:
+    @static method
+    def display():
+        print('hello')
+
+p=person()
+p.display()
+
+
+
+
+[A] Interview room question :-
+______________________________
+
+1> What are the verious differances between "methods and Constructor" 
+
+
+ANS:- 
+
+
+   Methods						          Costructors
+-------------				    	               -------------------
+1. Any name for the method			            1. Constructor should be __init__
+2. Method will be exceuted it can call that method          2. Constructor automatically Call whenever we are creation object
+3. Per object, Method can be call -N- number of times       3. Per object constructor will be executed only onces 
+4. inside method we can write business logic		    4. We have to declare and initialize instance variable
+
+
+
+
+
+2) Types of Variables in OOPS :-
+=============================
+
+1. Instance Variable ( non-static )
+2. Static Variables / class level variables
+3. Local Variables
+
+ 
+=========================================
+[1] Instance Variable ( non-static ) :-
+=========================================
+Ans:- Instance variable means the variables belongs to Objects is called as instance variable.
+ 
+
+1. If the value of variable is valid from object to object then such type of variable is called as instance variable.
+2. For every object a seperate copy of instance variable will be created.
+3. In general inside constructor we have to declare by using self
+4. How to access instant variables:-->
+   (A) Within the class we can access by using self keyword.
+   (B) But outside of class we can access by using referance variable object referance.__dict__
+
+5. By using one object referance if we perform any changes to the instance variable, the changes won't be effected to remaning objects...
+
+6. Constructor
+
++instance method ---> Self
+
+EX:- 
+
+class Test:
+    def __init__(self):
+        self.a=1000
+        self.b=2000
+    def m1(self):
+        self.c=300
+        self.d=400
+t1=Test()
+t1.m1()
+print(t1.__dict__)
+print(t1.a,t1.b,t1.c,t1.d)
+
+OT:-
+{'a': 100, 'b': 200, 'c': 300, 'd': 400}
+100 200 300 400
+
+
+
+7. Where we can declare instance variables ?
+   1> Inside cosntructor 
+   2> Inside instance method
+   3> Outside of class by using referance variable
+
+EX:-
+
+class Test:
+    def __init__(self):
+        self.a=1000
+        self.b=2000
+    def m1(self):
+        self.c=300
+        self.d=400
+t1=Test()
+t1.m1()
+t1.a=7777
+t1.b=8888
+t1.c=9999
+print(t1.__dict__)
+
+OT:- {'a': 7777, 'b': 8888, 'c': 9999, 'd': 400} 
+
+
+
+
+[A] How to remove instance variable from an object:-
+___________________________________________________
+
+Ex:-
+
+del self.variablename
+del objectreferance.variablename
+
+
+class Test:
+    def __init__(self):
+        self.a=1000
+        self.b=2000
+        self.c=2000
+        self.d=2000
+t1=Test()
+t2=test()
+
+del t1.c
+del t2.d
+print('t1:',t1.__dict__)
+print('t2:',t2.__dict__)
+
+OT:- t1: {'a': 1000, 'b': 2000, 'd': 2000}
+     t2: {'a': 1000, 'b': 2000, 'c': 2000}
+
+
+
+
+
+
+
+1st method :-
+---------------
+
+class Student:
+    def __init__(self,name,rollno,marks):
+        self.name=name
+        self.rollno=rollno
+        self.marks=marks
+
+    def display(self):
+        print('Student name : ', self.name)
+        print('Student rollno : ', self.rollno)
+        print('Student marks :', self.marks)
+
+s1=Student('Durga',101,90)
+s2=Student('Ravi',101,95)
+s3=Student('Shiva',101,99)
+
+s1.display()
+s2.display()
+s3.display()
+
+
+OT:-
+
+Student name :  Durga
+Student rollno :  101
+Student marks : 90
+Student name :  Ravi
+Student rollno :  101
+Student marks : 95
+Student name :  Shiva
+Student rollno :  101
+Student marks : 99
+
+
+
+
+
+
+2nd Method :-
+--------------
+
+
+class Student:
+    def __init__(self,name,rollno,marks):
+        self.name=name
+        self.rollno=rollno
+        self.marks=marks
+
+    def display(self):
+        print('Student name : ', self.name)
+        print('Student rollno : ', self.rollno)
+        print('Student marks :', self.marks)
+
+s1=Student('Durga',101,90)
+s2=Student('Ravi',101,95)
+s3=Student('Shiva',101,99)
+
+print(s1.name,s1.rollno,s1.marks)  ==========> This is changes it just observe
+
+OT:- Durga 101 90
+
+
+
+
+
+
+3rd Method:-
+------------
+
+
+class Student:
+    def __init__(self,name,rollno,marks):
+        self.name=name
+        self.rollno=rollno
+        self.marks=marks
+
+    def display(self):
+        print('Student name : ', self.name)
+        print('Student rollno : ', self.rollno)
+        print('Student marks :', self.marks)
+
+s1=Student('Durga',101,90)
+print(s1.__dict__)
+
+OT:- {'name': 'Durga', 'rollno': 101, 'marks': 90}
+
+
+
+
+
+=======================
+[2] Static Variables:-  Class level variable / Static variable
+=======================
+Ans:- Static variable means the variable belongs to class is called as static variable. 
+
+
+[A] The Basic differance between "INSTANCE VARIABLE & STATIC VARIABLE"
+----------------------------------------------------------------------
+
+*> Instance variable:- 1.Instance varibale "object level" varible.
+                       2.instance variable for every object seperate copy by default will be created. 
+
+*> Static Variable:-   1.Static variable "class level" variable. 
+                       2.class variable for total class one copy will be created.
+
+
+
+[B] How to access static  variable:-
+-----------------------------------
+
+Ex:- [1]
+
+class Test:
+    a=10  =====================> Class level variable / Static variable
+    def __init__(self):
+        self.b=20
+t=Test()
+print(t.a,t.b) =========> Object referance variable 
+print(Test.a,t.b)  =========> Class level referace
+
+OT:-
+
+10 20
+10 20
+
+NOTE:-Same out-Put
+----
+
+
+
+Ex:- [2]
+
+class Test:
+    a=10
+    def __init__(self):
+        self.b=20
+
+t1=Test()
+t2=Test()
+print("t1:",t1.a,t1.b) #10 20
+print("t2:",t2.a,t2.b) #10 20
+Test.a=888
+t1.b=999
+print("t1:",t1.a,t1.b) #888  999
+print("t2:",t2.a,t2.b) #888  20
+
+
+OT:- t1: 10 20
+     t2: 10 20
+     t1: 888 999
+     t2: 888 20
+
+
+
+1> Various places to declare the static variables :-
+----------------------------------------------------
+1. Within the class directly
+2. inside constructor by using class name
+3. inside instance method by using class name
+4. inside classmethod by using cls variable or class name
+5. inside static method by using name 
+
+
+[1]
+
+class Test:
+    a=10
+    def __init__(self):
+        print(self.a)
+        print(Test.a)
+    def m1(self):
+        print(self.a)
+        print(Test.a)
+
+    @classmethod --------------> 1 important 
+    def m2(cls):
+        print(cls.a)
+        print(Test.a)
+
+    @staticmethod -------------> 2 important
+    def m3():
+        print(Test.a)
+
+t=Test()
+t.m1()
+t.m2()
+t.m3()
+print(t.a)
+print(Test.a)
+
+OT:-
+
+10
+10
+10
+10
+10
+10
+10
+10
+10
+10
+10
+10
+10
+
+
+
+[2]
+
+class Test:
+    a=10
+    def __init(self):
+        self.b=20
+t1=Test()
+t2=Test()
+
+t1.a=888
+t1.b=999
+
+print(t2.a,t2.b)
+print(t1.a,t1.b)
+print(t1.__dict__)
+print(t2.__dict__)
+
+OT:- 
+
+
+
+
+
+
+3) Fundamental feature of Object Oriented Programing Language
+=============================================================
+> There are 3 fundamental feature of object Oriented programing language
+
+1] Inheritance 
+2] Encapsulation
+3] Polymorphism
+
+
+1] Inheritance 
+---------------
+i>   Single level inheritance
+ii>  Multilevel inheritance
+iii> Multiple inheritance
+
+
+i> Single level inheritance :- "Single level Inheritance" is nothing but inherit the functionality of other Class 
+****************************
+
+----------
+Base Class
+
+Feature 1   =============> Grand Father 
+Feature 2
+----------
+
+-------------
+Derived Class
+
+Feature 1
+Feature 2   =============> Father
+Feature 3
+-------------
+
+Ex:- 
+
+class animal:
+    def eating(self):
+        print("eating")
+
+class dog(animal):
+    def bark(self):
+        print("bark")
+
+d=dog()
+d.eating()
+d.bark()
+
+
+
+
+
+ii> Multilevel inheritance :- Multilevel inheritance we can inherit the one derivid class to another derivid class 
+---------------------------
+
+
+-----------
+Base class
+	   ==========================================> Grand Father
+feature 1
+-----------
+
+
+---------------
+Derivid Class
+
+feature of base =====================================> Father
+     +
+ feature 2
+----------------
+
+
+
+----------------------------------------
+Derivid Class 2
+
+feature of base class + derivide class ==============> Child
+      +
+feature 3
+----------------------------------------
+
+
+Ex:-
+
+class Person:
+    def display(self):
+        print("hello this is class person")
+
+class Employee(person):
+    def printing(self):
+        print("hello this is derivid class employee")
+
+class Programmer(employee):
+    def show(self):
+        print("hello this is another derived class programmer")
+
+p1=Programmer()
+p1.display()
+p1.printing()
+p1.show()
+
+
+
+
+iii> Multiple inheritance :- Multiple inheritance is a one class can inherit to more then one class
+-------------------------
+
+
+
+Father                         Mother
+---------                   ------------
+ Base                          Base 
+
+ Class 1                       Class 2
+---------                   ------------
+
+
+                Child
+             ------------
+               Derivid 
+                Class
+             ------------
+
+
+Ex:-
+
+class land_animal:
+    def printing(self):
+        print("This animal lives on land")
+
+class water_animal:
+    def display(self):
+        print("This animal lives in water")
+
+class frog(land_animal,water_animal):
+    pass
+
+f1=frog()
+f1.printing()
+f1.display()
+
+
+
+
+#] Method Overriding 
+====================
+* Overriding:- Method Overriding means "where the child class can provided specific of data are alredy defined in the parent class".
+------------
+
+Note : Child Class  : Sub Class
+       Parent Class : Super Class 
+
+class A:
+    def display(self):
+        print("Method belongs to class A")
+
+class B(A):
+    def display(self):
+        print("Method belongs to class B")
+
+
+b1=B()
+b1.display()
+
+
+NOTE:- This program is overriding method
+
+
+
+#] Method Overloading ( Note: Python is not supported By method Overloading concept )
+=====================
+* Overloading :- Method Overloading means which can call the same method in different way of parameters based on the number of arguments.
+--------------
+
+
+
+
+2] Encapsulation
+=================
+
+1> What is Encapsulation?
+Ans:- In the object oriented programming language we can restic to access the 'Variable' & 'Methods' is called as Encapsulation
+
+
+2> Why we need to Encapsulation?
+Ans:- To prevent the data to being modified 
+
+> Here there are 2 types of specification
+
+i> Private	ii> Public
+
+Ex:-
+
+class animal:
+    def __init__(self,name):
+        self.name=name
+
+class dog:
+    def display(self):
+        print(self.name)
+
+d=dog("baby dog")
+d.display()
+
+
+
+i> "Private Method"
+--------------------
+
+Ex:-
+
+class car:
+    def __init__(self):
+        self.__updatesoftware()
+    def drive(self):
+        print("driving")
+    def __updatesoftware(self):
+        print("updating software")
+
+blackcar=car()
+blackcar.drive()
+
+
+
+ii> "Private Variable" Method
+-----------------------------
+Ans:- Private variables can modify only inside the class method
+      we can't modified 'private variables' outside of the class.
+
+Ex:-
+
+class car:
+    __maxspeed=0
+    __name=""
+    def __init__(self):
+        self.__maxspeed=200
+        self.__name="super car"
+    def drive(self):
+        print("driving")
+        print(self.__maxspeed)
+    def setspeed(self,speed):
+        self.__maxspeed=speed
+        print(self.__maxspeed)
+
+redcar=car()
+redcar.drive()
+redcar.setspeed(100)
+
+
+
+
+
+3] Polymorphism
+================
+
+Ans:- Polymorphism means the same function name but dufferent signatures & number of arguments used in function.
+
+
+Ex:-
+
+class dog:
+    def sound(self):
+        print("bow bow")
+
+class cat:
+    def sound(self):
+        print("meow")
+
+    def makesound(animaltype):
+        animaltype.sound()
+
+catobj=cat()
+dogobj=dog()
+makesound=(catobj)
+makesound=(dogobj)
+
+
+Out-Put
+-------
+
+meow
+bow bow
+
+
+
+
+<------------END--------------->
+
+
+
+
+Abstract Classs & Abstract method
+==================================
+Python by default does not support abstract classes its not supported directly
+we have ABC module which we can achieve abstract classe 
+ABC stansd for ('Abstract Base Classes') so we can use that create our own abstrat classes
+
+ 
+1) What is abstract class & why we needed
+
+
+Ex:-
+
+from abc import ABC, abstractmethod
+
+class Computer(ABC):
+    @abstractmethod
+    def process(self):
+        pass
+
+class Laptop(Computer):
+    def process(self):
+        print("Its Running")
+
+
+class Whiteboard(Computer):
+    def write(self):
+        print("its writing")
+
+
+
+----------------------------------------------------
+
+Abstract Class
+==============
+
+1) What is Abstract Class?
+Ans:- A Class derived from ABC class which belongs to abc module, is know as abstract class in python.
+
+Note: ABC module is predefined module in python
+
+> ABC Class is known is as Meta Class which means a class that defines the behavior of other class.
+  So we can say, Meta Class ABC defines that the class which is derived from it becomes an abstract class.
+
+> Abstract class can have abstract method and concrete method.
+
+> Abstract class needs to be extended and its method implemented
+
+> PVM can not create object of an abstract class.
+
+Note : in abstract class we cant create object ----------> IMP
+
+
+EX:- 
+
+from abc import ABC, abstractmethod  -----------> decorator
+
+class Father(ABC):
+    @abstractmethod   -----------> Abstract Method / Method Without body
+    def disp(self):
+        pass 
+
+
+
+
+
+
+Abstract Method
+===============
+
+2) What is Abstract Method?
+Ans:- A abstract method is a method whose action is redefined in the child classes as per the requirment of the object.
+
+> We can declare a method as abstract method by using @abstractmethod
+
+
+
+
+Where we use Abstract Class
+===========================
+We use abtract class when there are some common feature shared by all the objects as they are
+
+
+
+EX:-
+
+from abc import ABC, abstractmethod
+
+class Father(ABC):
+    @abstractmethod
+    def disp(self): ==============================> Go to this Example
+        pass
+
+    def show(self):
+        print('Concrete Method')
+
+class Child(Father):
+    def disp(self):
+        print("Child Class")
+        print("Defining Abstract Method")
+        
+        
+c=Child()
+c.disp()
+c.show()
+
+
+
+
+
+
+EX:- 2
+
+from abc import ABC, abstractmethod
+
+class DefenceForce(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+    def gun(Self):
+        print("Gun=AK47")
+
+class Army(DefenceForce):
+    def area(self):
+        print("Army Are=Land")
+
+class Airforce(DefenceForce):
+    def area(self):
+        print("AirForce Are=Sky")
+
+class Navy(DefenceForce):
+    def area(self):
+        print("Navy Area=Sea")
+
+a=Army()
+af=AirForce()
+n=Navy()
+
+a.gun()
+a.area()
+print()
+af.gun()
+af.area()
+print()
+n.gun()
+n.area()
+
+
+Out-Put
+
+Gun = AK47
+Army Area = Land
+
+Gun = AK47
+AirForce Area = Sky
+
+Gun = AK47
+Navy Area = Sea 
+
+
+
+
+
+Str1="Automation"
+str1[::-1]
+for x in str1():
+   count i=0
+print()
+str1.count('A')
+str1.count('U')
